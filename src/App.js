@@ -1,11 +1,11 @@
+import React from 'react'
+import Navbar from './components/Navbar'
+import './App.css'
 
-
-function App() {
+const App = () => {
   return (
-    <div >
-      <h3>CAPSTONE PROJECT</h3>
-    </div>
-  );
+    <Navbar/>
+  )
 }
 
 export default App;

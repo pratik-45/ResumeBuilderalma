@@ -32,7 +32,54 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+/*Styling of navbar*/
+
+.main-nav {
+  color: black;
+  width: 60 px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  /* margin: 10px; */
+  border-radius: 0px;
+  background-color: rgb(83, 74, 74);
+}
+
+.logo img {
+  display: flex;
+  /* margin-bottom: 10px; */
+  /* padding-left: 20px; */
+  /* padding-bottom: 35px; */
+  height: 30px;
+  width: 100px;
+  border: radius 7px;
+  ;
+  /* background-color: bisque; */
+}
+
+.element1 h4 a {
+  display: flex;
+  margin-left: 700px;
+  text-decoration: none;
+  color: black;
+}
+
+.element2 h4 a {
+  display: flex;
+  margin-left: 50px;
+  text-decoration: none;
+  color: black;
+}
+
+.element3 h4 a {
+  display: flex;
+  margin-left: 50px;
+  text-decoration: none;
+  color: black;
 }
