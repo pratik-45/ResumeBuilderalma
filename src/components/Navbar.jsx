@@ -1,11 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import alogo from "./images/alogo.jpg";
-import AboutUs from "./AboutUs";
+// import Templates from "./Templates.jsx";
+// import Myresume from "./Myresume.jsx";
+// import AboutUs from "./AboutUs.jsx";
 
 export const Navbar = () => {
   return (
-    <header className="fixed flex justify-between items-center h-13 pl-4 w-screen bg-zinc-400 text-gray-800 shadow-lg">
+    <header className=" flex justify-between items-center h-13 pl-4 w-screen bg-zinc-400 text-gray-800 shadow-lg">
       {/* Desktop and tablet */}
       <div className="flex items-center">
         <Link to={"/"} className="flex items-center">
@@ -15,13 +17,13 @@ export const Navbar = () => {
       <div className="flex items-center">
         <ul className="flex space-x-4 pr-4">
           <li className="font-semibold hover:text-slate-200 cursor-pointer duration-100">
-            <Link to="/templates">Templates</Link>
+            <NavLink to="/Templates">Templates</NavLink>
           </li>
           <li className="font-semibold hover:text-slate-200 cursor-pointer duration-100">
-            <Link to="/my-resumes">My Resumes</Link>
+            <NavLink to="/Myresumes">My Resumes</NavLink>
           </li>
           <li className="font-semibold hover:text-slate-200 cursor-pointer duration-100">
-            <AboutUs /> {/* Render the AboutUs component directly */}
+            <NavLink to="/AboutUS">About Us</NavLink>
           </li>
           {/* Add more li items here if needed */}
         </ul>
