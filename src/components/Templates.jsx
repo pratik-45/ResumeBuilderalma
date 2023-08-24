@@ -1,7 +1,7 @@
 import React from "react";
-import Personalinfo from "./components/Personalinfo";
+import Personalinfo from "./Personalinfo"
 
-const ResumeTemplate = ({ showPersonalInfo }) => {
+const ResumeTemplate = ({ showPersonalinfo }) => {
   return (
     <div className="min-h-screen flex flex-wrap gap-7 ml-10">
       {/* First Template */}
@@ -177,7 +177,7 @@ const ResumeTemplate = ({ showPersonalInfo }) => {
         </section>
       </div>
          {/* Display PersonalInformation when showPersonalInfo is true */}
-         {showPersonalInfo && <Personalinfo />}
+         {showPersonalinfo && <Personalinfo />}
     </div>
   );
 };
