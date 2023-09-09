@@ -62,24 +62,3 @@
   ;
   /* background-color: bisque; */
 }
-
-.element1 h4 a {
-  display: flex;
-  margin-left: 700px;
-  text-decoration: none;
-  color: black;
-}
-
-.element2 h4 a {
-  display: flex;
-  margin-left: 50px;
-  text-decoration: none;
-  color: black;
-}
-
-.element3 h4 a {
-  display: flex;
-  margin-left: 50px;
-  text-decoration: none;
-  color: black;
-}
