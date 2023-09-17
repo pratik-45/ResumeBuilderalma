@@ -14,8 +14,9 @@ const Workexperience = () => {
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    console.log(data);
-    navigate("/education");
+    // Store the Workexperience data in localStorage
+    localStorage.setItem("WorkexperienceData", JSON.stringify(data));
+    navigate("/Education");
   };
 
   const handleBackClick = () => {
@@ -37,6 +38,7 @@ const Workexperience = () => {
       <h2 className="text-lg text-gray-600 underline pb-2">Experience1</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="p-4 rounded-lg">
+        {/* Rest of your form code */}
         <div className="mb-4">
           <label
             htmlFor="jobTitle"

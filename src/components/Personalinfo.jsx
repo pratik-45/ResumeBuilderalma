@@ -3,16 +3,14 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 
-
 const Personalinfo = () => {
   const [profileImage, setProfileImage] = useState(null);
-  const [Personalinfo, setPersonalinfo] = useState({});
   const { handleSubmit, formState, register } = useForm();
   const navigate = useNavigate();
-  
+
   const onSubmit = (data) => {
-    // Dispatch the personal info to Redux store
-    setPersonalinfo(data);
+    // Store the Personalinfo data in localStorage
+    localStorage.setItem("PersonalinfoData", JSON.stringify(data));
 
     // Redirect to the "Workexperience" component when the form is submitted
     navigate("/Workexperience");
@@ -65,6 +63,7 @@ const Personalinfo = () => {
           />
         </div>
 
+        {/* Rest of your form code */}
         {/* First Name and Last Name inputs */}
         <div className="mb-4">
           <div className="flex mb-2">
@@ -215,7 +214,7 @@ const Personalinfo = () => {
             type="button"
             onClick={() => {
               // Redirect to the "Workexperience" component when the user clicks "Preview"
-              navigate("/Workexperience");
+              navigate("/ResumePreview");
             }}
           >
             Preview

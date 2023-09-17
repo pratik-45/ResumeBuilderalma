@@ -1,18 +1,49 @@
-import React from "react";
+// import React from "react";
+// import generatePDF from "./generatePDF"; // Import the PDF generation function
+
+// const ResumePreview = ({ Personalinfo, Workexperience, Education, Keyskills }) => {
+//   // Function to handle the download button click
+import React, { useEffect, useState } from "react";
 import generatePDF from "./generatePDF"; // Import the PDF generation function
 
-const ResumePreview = ({ Personalinfo, Workexperience, Education, Keyskills }) => {
+const ResumePreview = ({
+  Personalinfo,
+  Workexperience,
+  Education,
+  Keyskills,
+}) => {
+  const [personalInfoData, setPersonalInfoData] = useState({});
+
+  useEffect(() => {
+    // Retrieve the Personalinfo data from localStorage
+    const storedData = localStorage.getItem("personalInfoData");
+    if (storedData) {
+      setPersonalInfoData(JSON.parse(storedData));
+    }
+  }, []);
+
   // Function to handle the download button click
   const handleDownloadPDF = () => {
     // Check if Personalinfo is available
-    if (Personalinfo) {
+    if (Object.keys(personalInfoData).length > 0) {
       // Generate the PDF using the data
-      generatePDF(Personalinfo, Workexperience, Education, Keyskills);
+      generatePDF(personalInfoData /* other data here */);
     } else {
-      // Handle the case where Personalinfo is missing or undefined
+      // Handle the case where Personalinfo is missing
       alert("Personal information is missing. Cannot generate PDF.");
     }
   };
+
+  // const handleDownloadPDF = () => {
+  //   // Check if Personalinfo is available
+  //   if (Personalinfo) {
+  //     // Generate the PDF using the data
+  //     generatePDF(Personalinfo, Workexperience, Education, Keyskills);
+  //   } else {
+  //     // Handle the case where Personalinfo is missing or undefined
+  //     alert("Personal information is missing. Cannot generate PDF.");
+  //   }
+  // };
 
   return (
     <div className="max-w-md mx-auto p-6 border rounded-md border-gray-300 mt-10">

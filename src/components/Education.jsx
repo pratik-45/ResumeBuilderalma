@@ -12,7 +12,8 @@ const Education = () => {
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    console.log(data);
+    // Store the Education data in localStorage
+    localStorage.setItem("EducationData", JSON.stringify(data));
     navigate("/keyskills");
   };
 
@@ -56,6 +57,7 @@ const Education = () => {
           )}
         </div>
 
+        {/* Rest of your input fields */}
         <div className="mb-4">
           <label
             htmlFor="university"
@@ -66,7 +68,7 @@ const Education = () => {
           <Controller
             name="university"
             control={control}
-            defaultValue=""
+            defaultValue={Education.university || ""}
             rules={{ required: "University is required" }}
             render={({ field }) => (
               <input
@@ -91,7 +93,7 @@ const Education = () => {
           <Controller
             name="degree"
             control={control}
-            defaultValue=""
+            defaultValue={Education.degree || ""}
             rules={{ required: "Degree is required" }}
             render={({ field }) => (
               <input
@@ -117,7 +119,7 @@ const Education = () => {
           <Controller
             name="startYear"
             control={control}
-            defaultValue=""
+            defaultValue={Education.startYear || ""}
             rules={{ required: "Start Year is required" }}
             render={({ field }) => (
               <input
@@ -145,7 +147,7 @@ const Education = () => {
           <Controller
             name="endYear"
             control={control}
-            defaultValue=""
+            defaultValue={Education.endYear || ""}
             rules={{ required: "End Year is required" }}
             render={({ field }) => (
               <input
