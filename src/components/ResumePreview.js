@@ -1,15 +1,15 @@
 import React from "react";
 import generatePDF from "./generatePDF"; // Import the PDF generation function
 
-const ResumePreview = ({ personalInfo, workExperience, education, skills }) => {
+const ResumePreview = ({ Personalinfo, Workexperience, Education, Keyskills }) => {
   // Function to handle the download button click
   const handleDownloadPDF = () => {
-    // Check if personalInfo is available
-    if (personalInfo) {
+    // Check if Personalinfo is available
+    if (Personalinfo) {
       // Generate the PDF using the data
-      generatePDF(personalInfo, workExperience, education, skills);
+      generatePDF(Personalinfo, Workexperience, Education, Keyskills);
     } else {
-      // Handle the case where personalInfo is missing or undefined
+      // Handle the case where Personalinfo is missing or undefined
       alert("Personal information is missing. Cannot generate PDF.");
     }
   };
@@ -22,15 +22,15 @@ const ResumePreview = ({ personalInfo, workExperience, education, skills }) => {
       <h2 className="text-lg text-gray-600 underline pb-2">
         Personal Information
       </h2>
-      {personalInfo ? (
+      {Personalinfo ? (
         <div>
           <p>
-            Name: {personalInfo.firstName} {personalInfo.lastName}
+            Name: {Personalinfo.firstName} {Personalinfo.lastName}
           </p>
-          <p>Contact No: {personalInfo.contactNo}</p>
-          <p>Email: {personalInfo.email}</p>
+          <p>Contact No: {Personalinfo.contactNo}</p>
+          <p>Email: {Personalinfo.email}</p>
           <p>
-            Address: {personalInfo.address}, Pin Code: {personalInfo.pinCode}
+            Address: {Personalinfo.address}, Pin Code: {Personalinfo.pinCode}
           </p>
         </div>
       ) : (
@@ -38,49 +38,49 @@ const ResumePreview = ({ personalInfo, workExperience, education, skills }) => {
       )}
 
       {/* Display work experience */}
-      <h2 className="text-lg text-gray-600 underline pb-2 mt-4">
+      <div className="text-lg text-gray-600 underline pb-2 mt-4">
         Work Experience
-      </h2>
-      {workExperience.length > 0 ? (
-        <ul>
-          {workExperience.map((exp, index) => (
-            <li key={index}>
-              <p>Experience {index + 1}:</p>
-              <p>Job Title: {exp.jobTitle}</p>
-              <p>Organization: {exp.organization}</p>
-              <p>Start Year: {exp.startYear}</p>
-              <p>End Year: {exp.endYear}</p>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No work experience available.</p>
-      )}
+        {Workexperience && Workexperience.length > 0 ? (
+          <ul>
+            {Workexperience.map((workExp, index) => (
+              <li key={index}>
+                <p>Experience {index + 1}:</p>
+                <p>Job Title: {workExp.jobTitle}</p>
+                <p>Organization: {workExp.organization}</p>
+                <p>Start Year: {workExp.startYear}</p>
+                <p>End Year: {workExp.endYear}</p>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No work experience available.</p>
+        )}
+      </div>
 
-      {/* Display education */}
+      {/* Display Education */}
       <h2 className="text-lg text-gray-600 underline pb-2 mt-4">Education</h2>
-      {education.length > 0 ? (
+      {Education && Education.length > 0 ? (
         <ul>
-          {education.map((edu, index) => (
+          {Education.map((education, index) => (
             <li key={index}>
               <p>Education {index + 1}:</p>
-              <p>Type: {edu.type}</p>
-              <p>University: {edu.university}</p>
-              <p>Degree: {edu.degree}</p>
-              <p>Start Year: {edu.startYear}</p>
-              <p>End Year: {edu.endYear}</p>
+              <p>Type: {education.type}</p>
+              <p>University: {education.university}</p>
+              <p>Degree: {education.degree}</p>
+              <p>Start Year: {education.startYear}</p>
+              <p>End Year: {education.endYear}</p>
             </li>
           ))}
         </ul>
       ) : (
-        <p>No education information available.</p>
+        <p>No Education information available.</p>
       )}
 
       {/* Display key skills */}
       <h2 className="text-lg text-gray-600 underline pb-2 mt-4">Key Skills</h2>
-      {skills.length > 0 ? (
+      {Keyskills && Keyskills.length > 0 ? (
         <ul>
-          {skills.map((skill, index) => (
+          {Keyskills.map((skill, index) => (
             <li key={index}>
               <p>
                 Skill {index + 1}: {skill}

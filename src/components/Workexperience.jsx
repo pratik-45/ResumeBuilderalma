@@ -3,7 +3,7 @@ import { useForm, Controller } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
 
-const Worke = () => {
+const Workexperience = () => {
   const {
     control,
     handleSubmit,
@@ -184,4 +184,4 @@ const Worke = () => {
   );
 };
 
-export default Worke;
+export default Workexperience;

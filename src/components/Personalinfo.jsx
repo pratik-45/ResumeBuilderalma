@@ -2,22 +2,20 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
-import { useDispatch, useSelector } from "react-redux";
-import { setPersonalInfo } from "../redux/actions";
+
 
 const Personalinfo = () => {
   const [profileImage, setProfileImage] = useState(null);
+  const [Personalinfo, setPersonalinfo] = useState({});
   const { handleSubmit, formState, register } = useForm();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const personalInfo = useSelector((state) => state.personalInfo);
-
+  
   const onSubmit = (data) => {
     // Dispatch the personal info to Redux store
-    dispatch(setPersonalInfo(data));
+    setPersonalinfo(data);
 
-    // Redirect to the "Worke" component when the form is submitted
-    navigate("/Worke");
+    // Redirect to the "Workexperience" component when the form is submitted
+    navigate("/Workexperience");
   };
 
   const handleImageChange = (e) => {
@@ -84,7 +82,7 @@ const Personalinfo = () => {
                 {...register("firstName", { required: true })}
                 className="form-input mt-1 block w-full rounded-md border-gray-300"
                 placeholder="John"
-                defaultValue={personalInfo.firstName || ""}
+                defaultValue={Personalinfo.firstName || ""}
               />
             </div>
             <div className="w-1/2 ml-2">
@@ -101,7 +99,7 @@ const Personalinfo = () => {
                 {...register("lastName", { required: true })}
                 className="form-input mt-1 block w-full rounded-md border-gray-300"
                 placeholder="Doe"
-                defaultValue={personalInfo.lastName || ""}
+                defaultValue={Personalinfo.lastName || ""}
               />
             </div>
           </div>
@@ -125,7 +123,7 @@ const Personalinfo = () => {
             })}
             className="form-input mt-1 block w-full rounded-md border-gray-300"
             placeholder="1234567890"
-            defaultValue={personalInfo.contactNo || ""}
+            defaultValue={Personalinfo.contactNo || ""}
           />
           {formState.errors.contactNo && (
             <p className="text-red-500 text-sm mt-1">
@@ -149,7 +147,7 @@ const Personalinfo = () => {
             })}
             className="form-input mt-1 block w-full rounded-md border-gray-300"
             placeholder="john.doe@example.com"
-            defaultValue={personalInfo.email || ""}
+            defaultValue={Personalinfo.email || ""}
           />
           {formState.errors.email && (
             <p className="text-red-500 text-sm mt-1">Valid Email is required</p>
@@ -170,7 +168,7 @@ const Personalinfo = () => {
             {...register("address", { required: true })}
             className="form-textarea mt-1 block w-full rounded-md border-gray-300"
             placeholder="123 Main St, City, Country"
-            defaultValue={personalInfo.address || ""}
+            defaultValue={Personalinfo.address || ""}
           />
           {formState.errors.address && (
             <p className="text-red-500 text-sm mt-1">Address is required</p>
@@ -191,7 +189,7 @@ const Personalinfo = () => {
             {...register("pinCode", { required: true })}
             className="form-input mt-1 block w-full rounded-md border-gray-300"
             placeholder="123456"
-            defaultValue={personalInfo.pinCode || ""}
+            defaultValue={Personalinfo.pinCode || ""}
           />
           {formState.errors.pinCode && (
             <p className="text-red-500 text-sm mt-1">Pin Code is required</p>
@@ -216,8 +214,8 @@ const Personalinfo = () => {
             className="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 focus:outline-none"
             type="button"
             onClick={() => {
-              // Redirect to the "Worke" component when the user clicks "Preview"
-              navigate("/Worke");
+              // Redirect to the "Workexperience" component when the user clicks "Preview"
+              navigate("/Workexperience");
             }}
           >
             Preview
