@@ -19,8 +19,10 @@ const Workexperience = () => {
     navigate("/Education");
   };
 
-  const handleBackClick = () => {
-    navigate("/Personalinfo");
+  // Function to add a new work experience detail template
+  const addNewWorkExperience = () => {
+    // You can add your logic here to add a new work experience detail template
+    console.log("Add New Work Experience");
   };
 
   // Generate an array of years for the dropdown (e.g., from 1990 to the current year)
@@ -170,18 +172,21 @@ const Workexperience = () => {
         <div className="text-right mt-6">
           <button
             type="submit"
-            className="bg-blue-500 text-white py-2 px-2 rounded-md hover:bg-blue-600 focus:outline-none mr-2 border border-blue-500"
+            className="bg-blue-500 text-white py-2 px-2 rounded-md hover:bg-blue-600 focus:outline-none ml-2"
           >
             Submit
           </button>
-          <button
-            className="bg-gray-300 text-gray-700 py-2 px-2 rounded-md hover:bg-gray-400 focus:outline-none border border-gray-300"
-            onClick={handleBackClick}
-          >
-            Back
-          </button>
         </div>
       </form>
+
+      <div className="text-center mt-6">
+        <p
+          className="text-blue-500 cursor-pointer"
+          onClick={addNewWorkExperience}
+        >
+          Add New
+        </p>
+      </div>
     </div>
   );
 };

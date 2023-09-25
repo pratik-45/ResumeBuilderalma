@@ -5,12 +5,12 @@ import Avatar from "@mui/material/Avatar";
 
 const Personalinfo = () => {
   const [profileImage, setProfileImage] = useState(null);
-  const { handleSubmit, formState, register } = useForm();
+  const { handleSubmit, formState, register, watch } = useForm();
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
     // Store the Personalinfo data in localStorage
-    localStorage.setItem("PersonalinfoData", JSON.stringify(data));
+    localStorage.setItem("personalInfoData", JSON.stringify(data));
 
     // Redirect to the "Workexperience" component when the form is submitted
     navigate("/Workexperience");
@@ -26,6 +26,7 @@ const Personalinfo = () => {
     fileInput.click();
   };
 
+  // Define the handleBackClick function here
   const handleBackClick = () => {
     navigate("/Templates");
   };
@@ -81,7 +82,7 @@ const Personalinfo = () => {
                 {...register("firstName", { required: true })}
                 className="form-input mt-1 block w-full rounded-md border-gray-300"
                 placeholder="John"
-                defaultValue={Personalinfo.firstName || ""}
+                defaultValue={watch("firstName")}
               />
             </div>
             <div className="w-1/2 ml-2">
@@ -98,7 +99,7 @@ const Personalinfo = () => {
                 {...register("lastName", { required: true })}
                 className="form-input mt-1 block w-full rounded-md border-gray-300"
                 placeholder="Doe"
-                defaultValue={Personalinfo.lastName || ""}
+                defaultValue={watch("lastName")}
               />
             </div>
           </div>
@@ -122,7 +123,7 @@ const Personalinfo = () => {
             })}
             className="form-input mt-1 block w-full rounded-md border-gray-300"
             placeholder="1234567890"
-            defaultValue={Personalinfo.contactNo || ""}
+            defaultValue={watch("contactNo")}
           />
           {formState.errors.contactNo && (
             <p className="text-red-500 text-sm mt-1">
@@ -146,7 +147,7 @@ const Personalinfo = () => {
             })}
             className="form-input mt-1 block w-full rounded-md border-gray-300"
             placeholder="john.doe@example.com"
-            defaultValue={Personalinfo.email || ""}
+            defaultValue={watch("email")}
           />
           {formState.errors.email && (
             <p className="text-red-500 text-sm mt-1">Valid Email is required</p>
@@ -167,7 +168,7 @@ const Personalinfo = () => {
             {...register("address", { required: true })}
             className="form-textarea mt-1 block w-full rounded-md border-gray-300"
             placeholder="123 Main St, City, Country"
-            defaultValue={Personalinfo.address || ""}
+            defaultValue={watch("address")}
           />
           {formState.errors.address && (
             <p className="text-red-500 text-sm mt-1">Address is required</p>
@@ -188,7 +189,7 @@ const Personalinfo = () => {
             {...register("pinCode", { required: true })}
             className="form-input mt-1 block w-full rounded-md border-gray-300"
             placeholder="123456"
-            defaultValue={Personalinfo.pinCode || ""}
+            defaultValue={watch("pinCode")}
           />
           {formState.errors.pinCode && (
             <p className="text-red-500 text-sm mt-1">Pin Code is required</p>

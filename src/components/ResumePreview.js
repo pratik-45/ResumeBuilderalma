@@ -1,49 +1,59 @@
-// import React from "react";
-// import generatePDF from "./generatePDF"; // Import the PDF generation function
-
-// const ResumePreview = ({ Personalinfo, Workexperience, Education, Keyskills }) => {
-//   // Function to handle the download button click
 import React, { useEffect, useState } from "react";
 import generatePDF from "./generatePDF"; // Import the PDF generation function
 
-const ResumePreview = ({
-  Personalinfo,
-  Workexperience,
-  Education,
-  Keyskills,
-}) => {
+const ResumePreview = () => {
   const [personalInfoData, setPersonalInfoData] = useState({});
+  const [workExperienceData, setWorkExperienceData] = useState({});
+  const [educationData, setEducationData] = useState({});
+  const [skillsData, setSkillsData] = useState([]);
 
   useEffect(() => {
     // Retrieve the Personalinfo data from localStorage
-    const storedData = localStorage.getItem("personalInfoData");
-    if (storedData) {
-      setPersonalInfoData(JSON.parse(storedData));
+    const storedPersonalInfo = localStorage.getItem("personalInfoData");
+    if (storedPersonalInfo) {
+      setPersonalInfoData(JSON.parse(storedPersonalInfo));
+    }
+
+    // Retrieve the Workexperience data from localStorage
+    const storedWorkExperience = localStorage.getItem("WorkexperienceData");
+    if (storedWorkExperience) {
+      setWorkExperienceData(JSON.parse(storedWorkExperience));
+    }
+
+    // Retrieve the Education data from localStorage
+    const storedEducation = localStorage.getItem("EducationData");
+    if (storedEducation) {
+      setEducationData(JSON.parse(storedEducation));
+    }
+
+    // Retrieve the skills data from localStorage
+    const storedSkills = localStorage.getItem("skillsData");
+    if (storedSkills) {
+      setSkillsData(JSON.parse(storedSkills));
     }
   }, []);
 
   // Function to handle the download button click
   const handleDownloadPDF = () => {
-    // Check if Personalinfo is available
-    if (Object.keys(personalInfoData).length > 0) {
+    // Check if Personalinfo and other data is available
+    if (
+      Object.keys(personalInfoData).length > 0 &&
+      Object.keys(workExperienceData).length > 0 &&
+      Object.keys(educationData).length > 0 &&
+      skillsData.length > 0
+    ) {
       // Generate the PDF using the data
-      generatePDF(personalInfoData /* other data here */);
+      generatePDF(
+        personalInfoData,
+        workExperienceData,
+        educationData,
+        skillsData
+      );
     } else {
-      // Handle the case where Personalinfo is missing
-      alert("Personal information is missing. Cannot generate PDF.");
+      // Handle the case where data is missing
+      alert("Some information is missing. Cannot generate PDF.");
     }
   };
-
-  // const handleDownloadPDF = () => {
-  //   // Check if Personalinfo is available
-  //   if (Personalinfo) {
-  //     // Generate the PDF using the data
-  //     generatePDF(Personalinfo, Workexperience, Education, Keyskills);
-  //   } else {
-  //     // Handle the case where Personalinfo is missing or undefined
-  //     alert("Personal information is missing. Cannot generate PDF.");
-  //   }
-  // };
 
   return (
     <div className="max-w-md mx-auto p-6 border rounded-md border-gray-300 mt-10">
@@ -53,15 +63,16 @@ const ResumePreview = ({
       <h2 className="text-lg text-gray-600 underline pb-2">
         Personal Information
       </h2>
-      {Personalinfo ? (
+      {Object.keys(personalInfoData).length > 0 ? (
         <div>
           <p>
-            Name: {Personalinfo.firstName} {Personalinfo.lastName}
+            Name: {personalInfoData.firstName} {personalInfoData.lastName}
           </p>
-          <p>Contact No: {Personalinfo.contactNo}</p>
-          <p>Email: {Personalinfo.email}</p>
+          <p>Contact No: {personalInfoData.contactNo}</p>
+          <p>Email: {personalInfoData.email}</p>
           <p>
-            Address: {Personalinfo.address}, Pin Code: {Personalinfo.pinCode}
+            Address: {personalInfoData.address}, Pin Code:{" "}
+            {personalInfoData.pinCode}
           </p>
         </div>
       ) : (
@@ -69,39 +80,33 @@ const ResumePreview = ({
       )}
 
       {/* Display work experience */}
-      <div className="text-lg text-gray-600 underline pb-2 mt-4">
+      <h2 className="text-lg text-gray-600 underline pb-2 mt-4">
         Work Experience
-        {Workexperience && Workexperience.length > 0 ? (
-          <ul>
-            {Workexperience.map((workExp, index) => (
-              <li key={index}>
-                <p>Experience {index + 1}:</p>
-                <p>Job Title: {workExp.jobTitle}</p>
-                <p>Organization: {workExp.organization}</p>
-                <p>Start Year: {workExp.startYear}</p>
-                <p>End Year: {workExp.endYear}</p>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No work experience available.</p>
-        )}
-      </div>
+      </h2>
+      {Object.keys(workExperienceData).length > 0 ? (
+        <ul>
+          <li>
+            <p>Job Title: {workExperienceData.jobTitle}</p>
+            <p>Organization: {workExperienceData.organization}</p>
+            <p>Start Year: {workExperienceData.startYear}</p>
+            <p>End Year: {workExperienceData.endYear}</p>
+          </li>
+        </ul>
+      ) : (
+        <p>No work experience available.</p>
+      )}
 
       {/* Display Education */}
       <h2 className="text-lg text-gray-600 underline pb-2 mt-4">Education</h2>
-      {Education && Education.length > 0 ? (
+      {Object.keys(educationData).length > 0 ? (
         <ul>
-          {Education.map((education, index) => (
-            <li key={index}>
-              <p>Education {index + 1}:</p>
-              <p>Type: {education.type}</p>
-              <p>University: {education.university}</p>
-              <p>Degree: {education.degree}</p>
-              <p>Start Year: {education.startYear}</p>
-              <p>End Year: {education.endYear}</p>
-            </li>
-          ))}
+          <li>
+            <p>Type: {educationData.type}</p>
+            <p>University: {educationData.university}</p>
+            <p>Degree: {educationData.degree}</p>
+            <p>Start Year: {educationData.startYear}</p>
+            <p>End Year: {educationData.endYear}</p>
+          </li>
         </ul>
       ) : (
         <p>No Education information available.</p>
@@ -109,9 +114,9 @@ const ResumePreview = ({
 
       {/* Display key skills */}
       <h2 className="text-lg text-gray-600 underline pb-2 mt-4">Key Skills</h2>
-      {Keyskills && Keyskills.length > 0 ? (
+      {skillsData.length > 0 ? (
         <ul>
-          {Keyskills.map((skill, index) => (
+          {skillsData.map((skill, index) => (
             <li key={index}>
               <p>
                 Skill {index + 1}: {skill}

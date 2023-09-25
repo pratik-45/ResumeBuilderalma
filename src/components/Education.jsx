@@ -1,4 +1,4 @@
-import React from "react";
+// import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
@@ -23,17 +23,12 @@ const Education = () => {
     console.log("Add New Education");
   };
 
-  const handleBackClick = () => {
-    navigate("/worke");
-  };
-
   return (
     <div className="max-w-md mx-auto p-6 border rounded-md border-gray-300 mt-10">
       <h1 className="text-2xl font-semibold">Education</h1>
       <h2 className="text-lg text-gray-600 underline pb-2">Education1</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="mt-4">
-        {/* ... (Input fields and validation logic) ... */}
         <div className="mb-4">
           <label htmlFor="type" className="block text-gray-700 font-semibold">
             Type
@@ -57,7 +52,6 @@ const Education = () => {
           )}
         </div>
 
-        {/* Rest of your input fields */}
         <div className="mb-4">
           <label
             htmlFor="university"
@@ -68,7 +62,7 @@ const Education = () => {
           <Controller
             name="university"
             control={control}
-            defaultValue={Education.university || ""}
+            defaultValue=""
             rules={{ required: "University is required" }}
             render={({ field }) => (
               <input
@@ -93,7 +87,7 @@ const Education = () => {
           <Controller
             name="degree"
             control={control}
-            defaultValue={Education.degree || ""}
+            defaultValue=""
             rules={{ required: "Degree is required" }}
             render={({ field }) => (
               <input
@@ -119,7 +113,7 @@ const Education = () => {
           <Controller
             name="startYear"
             control={control}
-            defaultValue={Education.startYear || ""}
+            defaultValue=""
             rules={{ required: "Start Year is required" }}
             render={({ field }) => (
               <input
@@ -147,7 +141,7 @@ const Education = () => {
           <Controller
             name="endYear"
             control={control}
-            defaultValue={Education.endYear || ""}
+            defaultValue=""
             rules={{ required: "End Year is required" }}
             render={({ field }) => (
               <input
@@ -171,12 +165,6 @@ const Education = () => {
             className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none ml-2"
           >
             Next
-          </button>
-          <button
-            className="text-gray-500 cursor-pointer ml-4"
-            onClick={handleBackClick}
-          >
-            Back
           </button>
         </div>
       </form>
