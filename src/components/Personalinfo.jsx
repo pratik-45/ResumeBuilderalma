@@ -10,10 +10,12 @@ const Personalinfo = () => {
 
   const onSubmit = (data) => {
     // Store the Personalinfo data in localStorage
-    localStorage.setItem(
-      "personalInfoData",
-      JSON.stringify({ ...data, profileImage })
-    );
+    localStorage.setItem("personalInfoData", JSON.stringify(data));
+
+    // Store the profileImage in sessionStorage
+    if (profileImage) {
+      sessionStorage.setItem("profileImage", profileImage);
+    }
 
     // Redirect to the "Workexperience" component when the form is submitted
     navigate("/Workexperience");
@@ -21,7 +23,7 @@ const Personalinfo = () => {
 
   const handleImageChange = (e) => {
     const selectedImage = e.target.files[0];
-    setProfileImage(selectedImage);
+    setProfileImage(URL.createObjectURL(selectedImage));
   };
 
   const handleAvatarClick = () => {
@@ -48,7 +50,7 @@ const Personalinfo = () => {
           <div onClick={handleAvatarClick} className="cursor-pointer">
             <Avatar
               alt="Profile Image"
-              src={profileImage ? URL.createObjectURL(profileImage) : ""}
+              src={profileImage ? profileImage : ""}
               sx={{
                 width: 80,
                 height: 80,
@@ -67,7 +69,7 @@ const Personalinfo = () => {
           />
         </div>
 
-        {/* Rest of your form code */}
+        {/* Rest of the code */}
         {/* First Name and Last Name inputs */}
         <div className="mb-4">
           <div className="flex mb-2">

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import generatePDF from "./generatePDF";
+import generatePDF from "./generatePDF"; // Import the PDF generation function
 
-const ResumePreview = () => {
+const ResumePreview = (props) => {
   const [personalInfoData, setPersonalInfoData] = useState({});
   const [workExperienceData, setWorkExperienceData] = useState({});
   const [educationData, setEducationData] = useState({});
@@ -9,40 +9,47 @@ const ResumePreview = () => {
   const [profileImage, setProfileImage] = useState(null);
 
   useEffect(() => {
+    // Retrieve the Personalinfo data from localStorage
     const storedPersonalInfo = localStorage.getItem("personalInfoData");
     if (storedPersonalInfo) {
       setPersonalInfoData(JSON.parse(storedPersonalInfo));
     }
 
+    // Retrieve the Workexperience data from localStorage
     const storedWorkExperience = localStorage.getItem("WorkexperienceData");
     if (storedWorkExperience) {
       setWorkExperienceData(JSON.parse(storedWorkExperience));
     }
 
+    // Retrieve the Education data from localStorage
     const storedEducation = localStorage.getItem("EducationData");
     if (storedEducation) {
       setEducationData(JSON.parse(storedEducation));
     }
 
+    // Retrieve the skills data from localStorage
     const storedSkills = localStorage.getItem("skillsData");
     if (storedSkills) {
       setSkillsData(JSON.parse(storedSkills));
     }
 
-    const storedProfileImage = localStorage.getItem("profileImage");
+    // Retrieve the profile image from sessionStorage
+    const storedProfileImage = sessionStorage.getItem("profileImage");
     if (storedProfileImage) {
       setProfileImage(storedProfileImage);
     }
   }, []);
 
+  // Function to handle the download button click
   const handleDownloadPDF = () => {
+    // Check if Personalinfo and other data is available
     if (
       Object.keys(personalInfoData).length > 0 &&
       Object.keys(workExperienceData).length > 0 &&
       Object.keys(educationData).length > 0 &&
-      skillsData.length > 0 &&
-      profileImage
+      skillsData.length > 0
     ) {
+      // Generate the PDF using the data
       generatePDF(
         personalInfoData,
         workExperienceData,
@@ -51,6 +58,7 @@ const ResumePreview = () => {
         profileImage
       );
     } else {
+      // Handle the case where data is missing
       alert("Some information is missing. Cannot generate PDF.");
     }
   };
