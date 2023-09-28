@@ -10,7 +10,10 @@ const Personalinfo = () => {
 
   const onSubmit = (data) => {
     // Store the Personalinfo data in localStorage
-    localStorage.setItem("personalInfoData", JSON.stringify(data));
+    localStorage.setItem(
+      "personalInfoData",
+      JSON.stringify({ ...data, profileImage })
+    );
 
     // Redirect to the "Workexperience" component when the form is submitted
     navigate("/Workexperience");
@@ -215,7 +218,8 @@ const Personalinfo = () => {
             type="button"
             onClick={() => {
               // Redirect to the "Workexperience" component when the user clicks "Preview"
-              navigate("/ResumePreview");
+              // Inside Personalinfo.js
+              navigate("/ResumePreview", { state: { profileImage } });
             }}
           >
             Preview

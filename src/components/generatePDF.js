@@ -1,85 +1,79 @@
 import jsPDF from "jspdf";
 
 const generatePDF = (
-  Personalinfo,
-  WorkexperienceData,
-  Education,
-  Keyskills
+  personalInfoData,
+  workExperienceData,
+  educationData,
+  skillsData,
+  profileImage
 ) => {
-  // Create a new jsPDF instance
   const doc = new jsPDF();
 
-  // Add content to the PDF using doc.text, doc.image, etc.
   doc.setFontSize(16);
   doc.text(20, 20, "Resume");
+
+  // Profile Image
+  if (profileImage) {
+    const imgData = profileImage;
+    doc.addImage(imgData, "JPEG", 20, 30, 40, 40);
+  }
 
   // Personal Information
   doc.setFontSize(14);
   doc.text(20, 30, "Personal Information:");
   doc.setFontSize(12);
-  if (Personalinfo) {
+  if (personalInfoData) {
     doc.text(
       20,
       40,
-      `Name: ${Personalinfo.firstName} ${Personalinfo.lastName}`
+      `Name: ${personalInfoData.firstName} ${personalInfoData.lastName}`
     );
-    doc.text(20, 50, `Contact No: ${Personalinfo.contactNo}`);
-    doc.text(20, 60, `Email: ${Personalinfo.email}`);
+    doc.text(20, 50, `Contact No: ${personalInfoData.contactNo}`);
+    doc.text(20, 60, `Email: ${personalInfoData.email}`);
     doc.text(
       20,
       70,
-      `Address: ${Personalinfo.address}, Pin Code: ${Personalinfo.pinCode}`
+      `Address: ${personalInfoData.address}, Pin Code: ${personalInfoData.pinCode}`
     );
   } else {
-    // Handle the case where Personalinfo is missing
     doc.text(20, 40, "Personal information is missing.");
   }
 
   // Work Experience
-  doc.setFontSize(14);
-  doc.text(20, 80, "Work Experience:");
-  doc.setFontSize(12);
-  if (Array.isArray(WorkexperienceData) && WorkexperienceData.length > 0) {
+  if (workExperienceData) {
+    doc.setFontSize(14);
+    doc.text(20, 80, "Work Experience:");
+    doc.setFontSize(12);
     let yOffset = 90;
-    WorkexperienceData.forEach((experience, index) => {
-      yOffset += 10;
-      doc.text(20, yOffset, `Experience ${index + 1}:`);
-      yOffset += 10;
-      doc.text(20, yOffset, `Job Title: ${experience.jobTitle}`);
-      yOffset += 10;
-      doc.text(20, yOffset, `Organization: ${experience.organization}`);
-      yOffset += 10;
-      doc.text(20, yOffset, `Start Year: ${experience.startYear}`);
-      yOffset += 10;
-      doc.text(20, yOffset, `End Year: ${experience.endYear}`);
-    });
+    doc.text(20, yOffset, `Job Title: ${workExperienceData.jobTitle}`);
+    yOffset += 10;
+    doc.text(20, yOffset, `Organization: ${workExperienceData.organization}`);
+    yOffset += 10;
+    doc.text(20, yOffset, `Start Year: ${workExperienceData.startYear}`);
+    yOffset += 10;
+    doc.text(20, yOffset, `End Year: ${workExperienceData.endYear}`);
   } else {
-    // Handle the case where WorkexperienceData is missing or empty
+    doc.setFontSize(14);
     doc.text(20, 80, "No work experience available.");
   }
 
   // Education
-  doc.setFontSize(14);
-  doc.text(20, 180, "Education:");
-  doc.setFontSize(12);
-  if (Array.isArray(Education) && Education.length > 0) {
+  if (educationData) {
+    doc.setFontSize(14);
+    doc.text(20, 180, "Education:");
+    doc.setFontSize(12);
     let yOffset = 190;
-    Education.forEach((education, index) => {
-      yOffset += 10;
-      doc.text(20, yOffset, `Education ${index + 1}:`);
-      yOffset += 10;
-      doc.text(20, yOffset, `Type: ${education.type}`);
-      yOffset += 10;
-      doc.text(20, yOffset, `University: ${education.university}`);
-      yOffset += 10;
-      doc.text(20, yOffset, `Degree: ${education.degree}`);
-      yOffset += 10;
-      doc.text(20, yOffset, `Start Year: ${education.startYear}`);
-      yOffset += 10;
-      doc.text(20, yOffset, `End Year: ${education.endYear}`);
-    });
+    doc.text(20, yOffset, `Type: ${educationData.type}`);
+    yOffset += 10;
+    doc.text(20, yOffset, `University: ${educationData.university}`);
+    yOffset += 10;
+    doc.text(20, yOffset, `Degree: ${educationData.degree}`);
+    yOffset += 10;
+    doc.text(20, yOffset, `Start Year: ${educationData.startYear}`);
+    yOffset += 10;
+    doc.text(20, yOffset, `End Year: ${educationData.endYear}`);
   } else {
-    // Handle the case where Education is missing or empty
+    doc.setFontSize(14);
     doc.text(20, 180, "No education information available.");
   }
 
@@ -87,18 +81,16 @@ const generatePDF = (
   doc.setFontSize(14);
   doc.text(20, 280, "Key Skills:");
   doc.setFontSize(12);
-  if (Array.isArray(Keyskills) && Keyskills.length > 0) {
+  if (skillsData.length > 0) {
     let yOffset = 290;
-    Keyskills.forEach((skill, index) => {
-      yOffset += 10;
+    skillsData.forEach((skill, index) => {
       doc.text(20, yOffset, `Skill ${index + 1}: ${skill}`);
+      yOffset += 20; // Increase the yOffset to add more spacing
     });
   } else {
-    // Handle the case where Keyskills is missing or empty
     doc.text(20, 280, "No key skills available.");
   }
 
-  // Save the PDF or display it for download
   doc.save("resume.pdf");
 };
 
